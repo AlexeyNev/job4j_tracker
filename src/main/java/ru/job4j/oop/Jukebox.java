@@ -11,7 +11,6 @@ public class Jukebox {
         }
     }
 
-
     public static void main(String[] args) {
         Jukebox grupp = new Jukebox();
         int pos = 2;
