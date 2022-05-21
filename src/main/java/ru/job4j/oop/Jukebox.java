@@ -15,6 +15,5 @@ public class Jukebox {
         Jukebox grupp = new Jukebox();
         int pos = 2;
         grupp.music(pos);
-
     }
 }
