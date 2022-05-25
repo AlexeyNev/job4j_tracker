@@ -32,15 +32,13 @@ public class Calculator {
         int rsl = calculator.multiply(5);
         System.out.println(rsl);
 
+        int rsl3 = calculator.divide(10);
+        System.out.println(rsl3);
+
         int rsl2 = minus(10);
         System.out.println(rsl2);
 
-        Calculator calc = new Calculator();
-        int rsl3 = calc.divide(10);
-        System.out.println(rsl3);
-
-        Calculator sumAll = new Calculator();
-        int rsl4 = sumAll.sumAllOperation(result);
+        int rsl4 = calculator.sumAllOperation(result);
         System.out.println(rsl4);
     }
 }
