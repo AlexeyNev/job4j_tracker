@@ -6,6 +6,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class TrackerTest {
+
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() {
         Tracker tracker = new Tracker();
@@ -15,6 +16,7 @@ public class TrackerTest {
         Item result = tracker.findById(item.getId());
         assertThat(result.getName(), is(item.getName()));
     }
+
     @Test
     public void whenTestFindById() {
         Tracker tracker = new Tracker();
