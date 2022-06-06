@@ -58,9 +58,8 @@ public class Tracker {
         if (rsl) {
             item.setId(id);
             items[ind] = item;
-            return true;
         }
-        return false;
+        return rsl;
     }
 
     public boolean delete(int id) {
