@@ -69,6 +69,7 @@ public class StartUI {
                 "Add new Item", "Show all items", "Edit item",
                 "Delete item", "Find item by id", "Find items by name",
                 "Exit Program"
+
         };
         System.out.println("Menu:");
         for (int i = 0; i < menu.length; i++) {
