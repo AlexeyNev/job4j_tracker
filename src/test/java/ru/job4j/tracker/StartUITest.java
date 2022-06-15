@@ -36,7 +36,7 @@ public class StartUITest {
         Item item = new Item("new");
         tracker.add(item);
         String[] answers = {
-                 String.valueOf(item.getId()) ,"new"
+                 String.valueOf(item.getId()),
         };
         StartUI.deleteItem(new StubInput(answers), tracker);
         Item delete = tracker.findById(item.getId());
