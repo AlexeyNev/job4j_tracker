@@ -1,9 +1,9 @@
 package ru.job4j.tracker;
 
-public class ExitMenu implements UserAction {
+public class Exit implements UserAction {
     @Override
     public String name() {
-        return "Exit Menu.";
+        return "Exit.";
     }
 
     @Override
