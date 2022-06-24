@@ -30,7 +30,7 @@ public class StartUITest {
                 new String[] {"0", String.valueOf(item.getId()), replacedName, "1"}
         );
         UserAction[] actions = {
-                new EditItem(),
+                new ReplaceAction(),
                 new Exit()
         };
         new StartUI().init(in, tracker, actions);
