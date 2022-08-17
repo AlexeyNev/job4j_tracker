@@ -11,6 +11,7 @@ public class UsageArrayList {
 
         for (String value : names) {
             System.out.println(value);
+
         }
     }
 }
