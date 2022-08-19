@@ -15,6 +15,14 @@ public class PhoneDictionaryTest {
         ArrayList<Person> persons = new ArrayList<>();
         List<Person> emptyList = new ArrayList();
         assertThat(persons, is(emptyList));
+        /**
+         * PhoneDictionary phone = new PhoneDictionary();
+         *         phone.add(
+         *                 new Person("Petr", "Arsentev", "534872", "Bryansk")
+         *         );
+         *         List<Person> emptyList = new ArrayList();
+         *         assertThat(phone, is(emptyList)); ???
+         */
     }
 
     @Test
