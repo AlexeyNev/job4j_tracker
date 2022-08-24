@@ -1,50 +1,92 @@
 package ru.job4j.tracker;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+/**
+ * В классе Tracker должны быть методы:
+ * * добавление заявок - public Item add(Item item);
+ * * получение списка всех заявок - public Item[] findAll();
+ * * получение списка по имени - public Item[] findByName(String key);
+ * * получение заявки по id - public Item findById(int id);
+ * Поле private Item[] items = new Item[100] содержит возможное количество заявлений.
+ * Оно у нас ограничено сотней позиций.
+ */
 
 public class Tracker {
-    private final Item[] items = new Item[100];
+    private final List<Item> items = new ArrayList<>();
     private int ids = 1;
     private int size = 0;
 
+    /**
+     *      * Метод public Item add(Item item) добавляет заявку,
+     *      * переданную в аргументах в массив заявок items.
+     *      * В методе add нужно проставить уникальный ключ в объект Item item.
+     *      * Это нужно сделать через метод setId.
+     *      * Поле ids используется для генерации нового ключа.
+     *      * В нашем примере мы используем последовательность.
+     *      * То есть каждый вызов метод add будет добавлять в поле ids единицу.
+     *      * Так мы сможем обеспечить уникальность поле id в Item.
+     *      * Аналогичный подход используется в базах данных.
+     *      * @param item - уникальный ключ.
+     *      * @return - добавил заявку
+     */
+
     public Item add(Item item) {
         item.setId(ids++);
-        items[size++] = item;
+        items.set(size++, item);
         return item;
     }
+    /**
+     * Метод public Item findById(int id) проверяет в цикле все элементы массива items,
+     * сравнивая id с аргументом int id
+     * и возвращает найденный Item. Если Item не найден - возвращает null.
+     * @param id - id
+     * @return - возвращает найденный Item. Если Item не найден - возвращает null.
+     */
 
     public Item findById(int id) {
-        Item rsl = null;
-        for (int index = 0; index < size; index++) {
-            Item item = items[index];
-            if (item.getId() == id) {
-                rsl = item;
-                break;
-            }
-        }
-        return rsl;
+        int index = indexOf(id);
+        return index != -1 ? items.get(index) : null;
     }
 
-    public Item[] findByName(String key) {
-        Item[] rsl = new Item[size];
+    /**
+     * Метод public Item[] findByName(String key)
+     * проверяет в цикле все элементы массива items,
+     * сравнивая name (используя метод getName класса Item) с аргументом метода String key.
+     * Элементы, у которых совпадает name, копирует в результирующий массив и возвращает его.
+     * Алгоритм этого метода аналогичен методу findAll.
+     * @param key - аргументом метода String key
+     * @return - возвращает массив
+     */
+
+    public List<Item> findByName(String key) {
+        List<Item> copy = List.of(new Item[size]);
         int count = 0;
         for (int i = 0; i < size; i++) {
-            Item item = items[i];
-            if (item.getName().equals(key)) {
-                rsl[count++] = item;
+            if (items.get(i).getName().equals(key)) {
+                copy.set(count++, items.get(i));
             }
         }
-        return Arrays.copyOf(rsl, count);
+        return copy;
     }
-
-    public Item[] findAll() {
-        return Arrays.copyOf(items, size);
+    /**
+     * Метод public Item[] findAll()
+     * @return - возвращает копию массива items без null элементов (без пустых ячеек).
+     */
+    
+    public List<Item> findAll() {
+        return items;
     }
+    /**
+     * Метод, который возвращает index по id.
+     * @param id - id
+     * @return - индекс
+     */
 
     private int indexOf(int id) {
         int rsl = -1;
         for (int index = 0; index < size; index++) {
-            if (items[index].getId() == id) {
+            if (items.get(index).getId() == id) {
                 rsl = index;
                 break;
             }
@@ -52,23 +94,34 @@ public class Tracker {
         return rsl;
     }
 
+    /**
+     * Метод удаляет заявку, которая уже есть в системе и добавляет новую в эту ячейку
+     * @param id   - индекс ячейки, где надо произвести замену
+     * @param item - заявка, на которую меняем
+     * @return - true, если замена произведена или false, если index по id не найден
+     */
+
     public boolean replace(int id, Item item) {
-        int ind = indexOf(id);
-        boolean rsl = ind != -1;
+        int index = indexOf(id);
+        boolean rsl = index != -1;
         if (rsl) {
             item.setId(id);
-            items[ind] = item;
+            items.set(index, item);
         }
         return rsl;
     }
+
+    /**
+     * Метод удаления заявки
+     * @param id - id заявки
+     * @return - возвращает true, если заявление удалено или false, если index не найдет по id.
+     */
 
     public boolean delete(int id) {
         int index = indexOf(id);
         boolean rsl = index != -1;
         if (rsl) {
-            System.arraycopy(items, index + 1, items, index, size - index - 1);
-            items[size - 1] = null;
-            size--;
+            items.remove(index);
         }
         return rsl;
     }
