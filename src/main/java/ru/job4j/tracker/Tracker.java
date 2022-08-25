@@ -15,7 +15,6 @@ import java.util.List;
 public class Tracker {
     private final List<Item> items = new ArrayList<>();
     private int ids = 1;
-    private int size = 0;
 
     /**
      *      * Метод public Item add(Item item) добавляет заявку,
@@ -33,7 +32,7 @@ public class Tracker {
 
     public Item add(Item item) {
         item.setId(ids++);
-        items.set(size++, item);
+        items.add(item);
         return item;
     }
     /**
@@ -60,9 +59,9 @@ public class Tracker {
      */
 
     public List<Item> findByName(String key) {
-        List<Item> copy = List.of(new Item[size]);
+        List<Item> copy = List.of(new Item[items.size()]);
         int count = 0;
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < items.size(); i++) {
             if (items.get(i).getName().equals(key)) {
                 copy.set(count++, items.get(i));
             }
@@ -73,9 +72,9 @@ public class Tracker {
      * Метод public Item[] findAll()
      * @return - возвращает копию массива items без null элементов (без пустых ячеек).
      */
-    
+
     public List<Item> findAll() {
-        return items;
+        return List.copyOf(items);
     }
     /**
      * Метод, который возвращает index по id.
@@ -85,7 +84,7 @@ public class Tracker {
 
     private int indexOf(int id) {
         int rsl = -1;
-        for (int index = 0; index < size; index++) {
+        for (int index = 0; index < items.size(); index++) {
             if (items.get(index).getId() == id) {
                 rsl = index;
                 break;
