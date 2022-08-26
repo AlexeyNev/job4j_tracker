@@ -59,11 +59,10 @@ public class Tracker {
      */
 
     public List<Item> findByName(String key) {
-        List<Item> copy = List.of(new Item[items.size()]);
-        int count = 0;
-        for (int i = 0; i < items.size(); i++) {
-            if (items.get(i).getName().equals(key)) {
-                copy.set(count++, items.get(i));
+        List<Item> copy = new ArrayList<>();
+        for (Item item : items) {
+            if (item.getName().equals(key)) {
+                copy.add(item);
             }
         }
         return copy;
