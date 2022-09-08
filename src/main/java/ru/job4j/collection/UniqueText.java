@@ -28,6 +28,7 @@ public class UniqueText {
         for (String l : text) {
             if (!check.contains(l)) {
                 rsl = false;
+                break;
             }
         }
         return rsl;
