@@ -16,10 +16,13 @@ public class User implements Comparable<User> {
         this.age = age;
     }
 
+    /**
+     *  0 == если объекты равны
+     */
     @Override
     public int compareTo(User another) {
         int rsl = name.compareTo(another.name);
-        if (rsl == 0) { // 0 == если объекты равны
+        if (rsl == 0) {
             rsl = Integer.compare(age, another.age);
         }
         return rsl;
